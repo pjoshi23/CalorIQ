@@ -1,169 +1,97 @@
-# Caloriq - Nutrition Tracking App
+# Caloriq – Feature Overview & App Walkthrough
 
-A React Native Expo app for tracking nutrition with social features including user following and meal sharing.
+Caloriq is a modern nutrition tracking app that combines AI-powered food analysis, detailed meal logging, and a vibrant social experience. Below is a comprehensive overview of its features and a walkthrough of the user journey.
 
-## Features
+---
 
-### Core Features
-- **Food Analysis**: AI-powered nutrition analysis using Google Gemini Vision API
-- **Meal Logging**: Track daily meals with detailed nutrition information
-- **Progress Tracking**: Visual progress rings for calories and macros
-- **User Authentication**: Firebase authentication with user profiles
+## 🌟 Core Features
 
-### Social Features
-- **User Discovery**: Browse and follow other users
-- **Feed System**: View posts from users you follow
-- **Post Sharing**: Share meals to your feed for others to see
-- **Like System**: Like posts from other users
-- **Real-time Updates**: Live updates for posts and user data
+### 1. **AI-Powered Food Analysis**
+- Instantly analyze the nutritional content of your meals using the Google Gemini Vision API.
+- Snap a photo or select from your gallery; the app detects calories, protein, carbs, and fat.
+- Results are shown in a visually rich summary, ready to log or share.
 
-## Setup Instructions
+### 2. **Meal Logging & Progress Tracking**
+- Log meals with a single tap after analysis, or manually add details.
+- Each meal entry includes a photo, nutrition breakdown, and meal type (breakfast, lunch, dinner, snack).
+- Daily and weekly progress is visualized with animated progress rings and macro bars, helping you stay on track with your goals.
 
-### 1. Firebase Setup
-1. Create a Firebase project
-2. Enable Authentication (Email/Password)
-3. Enable Firestore Database
-4. Add your Firebase config to `lib/firebase.ts`
+### 3. **Social Feed & Community**
+- Share your meals to a social feed for your followers to see.
+- Like and comment on posts from users you follow.
+- Discover new users, follow/unfollow, and grow your nutrition community.
 
-### 2. Google Gemini API Setup
-1. Go to [Google AI Studio](https://makersuite.google.com/app/apikey)
-2. Create an API key
-3. Add the key to your environment variables:
-   ```
-   EXPO_PUBLIC_GEMINI_API_KEY=your-api-key-here
-   ```
+### 4. **User Profiles & Achievements**
+- Each user has a profile with a picture, bio, stats, and a grid of shared meals.
+- View your own meal log in a list, and see your social posts in a grid.
+- Real-time follower/following counts and live updates.
 
-### 3. Install Dependencies
-```bash
-npm install
-```
+### 5. **Authentication & Security**
+- Secure sign up and sign in with Firebase Authentication.
+- User data is protected and only accessible by the owner (meals) or followers (posts).
 
-### 4. Run the App
-```bash
-npx expo start
-```
+---
 
-## Database Structure
+## 🚀 App Walkthrough
 
-### Users Collection
-```javascript
-{
-  id: "user_id",
-  displayName: "User Name",
-  username: "@username",
-  email: "user@example.com",
-  profilePicture: "https://...",
-  bio: "User bio",
-  followers: ["follower_id_1", "follower_id_2"],
-  following: ["following_id_1", "following_id_2"],
-  posts: 5,
-  joinedDate: Timestamp
-}
-```
+### **Onboarding & Authentication**
+- **Sign Up:** New users create an account with name, email, password, and optional profile picture (camera or gallery).
+- **Sign In:** Existing users log in securely. Password visibility toggle and error handling included.
 
-### Posts Collection
-```javascript
-{
-  id: "post_id",
-  userId: "user_id",
-  userProfile: {
-    id: "user_id",
-    displayName: "User Name",
-    username: "@username",
-    profilePicture: "https://..."
-  },
-  image: "image_uri",
-  foodName: "Grilled Chicken",
-  caption: "Delicious meal!",
-  nutrition: {
-    calories: 320,
-    protein: 28,
-    carbs: 15,
-    fat: 18
-  },
-  likes: ["user_id_1", "user_id_2"],
-  comments: 0,
-  createdAt: Timestamp
-}
-```
+### **Home Screen**
+- **Personalized Greeting:** Dynamic greeting based on time of day and user's name.
+- **Progress Overview:** Animated rings and macro cards show your calorie and macro progress for the day.
+- **Recent Meals:** Quick glance at your latest logged meals, with images and nutrition stats.
+- **Quick Actions:** Easily access the camera to scan a new meal or view your full meal log.
 
-### Meals Collection
-```javascript
-{
-  id: "meal_id",
-  userId: "user_id",
-  name: "Grilled Chicken",
-  image: "image_uri",
-  calories: 320,
-  protein: 28,
-  carbs: 15,
-  fat: 18,
-  time: "2:30 PM",
-  mealType: "Meal",
-  date: "2024-01-15",
-  createdAt: Timestamp
-}
-```
+### **Meal Logging**
+- **Camera & Gallery:** Use the in-app camera or pick from your gallery to analyze a meal.
+- **AI Nutrition Analysis:** The app processes the image and returns a detailed nutrition breakdown.
+- **Log or Share:** Add the meal to your personal log, or share it to your social feed with a caption.
 
-## How the Followers System Works
+### **Meal Log**
+- **Daily Log:** View all meals logged for the current day, with options to edit or delete.
+- **Macro Breakdown:** See your daily totals for calories, protein, carbs, and fat, with visual progress bars.
+- **Weekly Trends:** Track your nutrition over the week for deeper insights.
 
-### 1. User Discovery
-- Users can browse all other users in the app
-- Search functionality to find specific users
-- Follow/unfollow buttons with real-time updates
+### **Social Feed**
+- **Posts from Followed Users:** Your feed shows meals shared by users you follow.
+- **Engagement:** Like posts, view like counts, and comment (future feature).
+- **Post Details:** Each post displays the meal photo, nutrition info, caption, and user profile.
 
-### 2. Feed System
-- Feed shows posts only from users you follow
-- Real-time updates when new posts are created
-- Like functionality with live like counts
+### **User Discovery**
+- **Browse Users:** Search and discover other users in the app.
+- **Follow/Unfollow:** Instantly follow or unfollow users, with real-time updates to your feed.
+- **Profile Viewing:** Tap on a user to view their profile, posts, and stats.
 
-### 3. Post Creation
-- After analyzing food, users can post to their feed
-- Posts include nutrition information and captions
-- Posts are visible to followers in their feed
+### **Profile**
+- **Your Stats:** See your follower/following counts, bio, and joined date.
+- **Posts Grid:** View all meals you've shared to the feed.
+- **Meal Log List:** Access your full meal logging history.
 
-### 4. Profile Integration
-- Real follower/following counts
-- Grid view shows user's posts
-- List view shows all logged meals
+---
 
-## Key Components
+## 🛠️ Unique & Advanced Features
 
-- **AuthContext**: Manages user state, following relationships, and posts
-- **FeedScreen**: Displays posts from followed users
-- **DiscoverScreen**: Browse and follow other users
-- **ProfileScreen**: Shows user stats and posts/meals
-- **NutritionResultScreen**: Create posts after food analysis
+- **AI Vision Integration:** Seamless use of Google Gemini Vision for food recognition and nutrition estimation.
+- **Animated Progress Rings:** Custom SVG-based rings for calories and macros, with gradient fills and smooth animation.
+- **Real-Time Social Updates:** Instant updates to feed, likes, and follower counts using Firebase.
+- **Rich Meal Cards:** Visually appealing cards for meals and posts, with badges, icons, and macro breakdowns.
+- **Flexible Meal Types:** Support for different meal types, each with unique color coding.
+- **Accessibility:** Keyboard avoiding views, large touch targets, and clear error messages for a smooth user experience.
 
-## Environment Variables
+---
 
-Create a `.env` file in the root directory:
-```
-EXPO_PUBLIC_GEMINI_API_KEY=your-gemini-api-key
-```
+## 🧭 User Flow Summary
 
-## Security Rules (Firestore)
+1. **Sign Up / Sign In**
+2. **Home:** See your progress and recent meals.
+3. **Scan or Log a Meal:** Use the camera or gallery, analyze with AI, log or share.
+4. **View Log:** Track your daily and weekly nutrition.
+5. **Social Feed:** Engage with your community.
+6. **Discover:** Find and follow new users.
+7. **Profile:** Manage your account, see your stats and history.
 
-```javascript
-rules_version = '2';
-service cloud.firestore {
-  match /databases/{database}/documents {
-    // Users can read all user profiles
-    match /users/{userId} {
-      allow read: if true;
-      allow write: if request.auth != null && request.auth.uid == userId;
-    }
-    
-    // Posts can be read by all, written by post owner
-    match /posts/{postId} {
-      allow read: if true;
-      allow write: if request.auth != null && request.auth.uid == resource.data.userId;
-    }
-    
-    // Meals can only be accessed by the owner
-    match /meals/{mealId} {
-      allow read, write: if request.auth != null && request.auth.uid == resource.data.userId;
-    }
-  }
-}
-``` 
+---
+
+This app is designed to make nutrition tracking effortless, insightful, and social. Whether you're focused on your own goals or want to share your journey with others, Caloriq provides the tools and community to help you succeed. 
